@@ -77,4 +77,26 @@ class Task {
 
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function toggleStatus($id) {
+
+    $conn = Db::getConnection();
+
+    $statement = $conn->prepare("
+        UPDATE tasks
+
+        SET status =
+        CASE
+            WHEN status = 'todo' THEN 'done'
+            ELSE 'todo'
+        END
+
+        WHERE id = :id
+    ");
+
+    $statement->bindValue(":id", $id);
+
+    return $statement->execute();
+}
+
 }
