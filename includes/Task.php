@@ -99,4 +99,18 @@ class Task {
     return $statement->execute();
 }
 
+public static function delete($id) {
+
+    $conn = Db::getConnection();
+
+    $statement = $conn->prepare("
+        DELETE FROM tasks
+        WHERE id = :id
+    ");
+
+    $statement->bindValue(":id", $id);
+
+    return $statement->execute();
+}
+
 }

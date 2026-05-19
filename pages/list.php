@@ -125,6 +125,9 @@ $tasks = Task::getTasksByList($_GET['id']);
         <a href="toggle-task.php?id=<?php echo $task['id']; ?>">
             Toggle
         </a>
+        <a href="delete-task.php?id=<?php echo $task['id']; ?>">
+    Delete
+</a>
 
     </p>
 
