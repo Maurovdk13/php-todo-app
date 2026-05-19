@@ -74,9 +74,15 @@ $lists = TodoList::getAllByUser(
 
     <?php foreach($lists as $list): ?>
 
-        <p>
-            <?php echo htmlspecialchars($list['title']); ?>
-        </p>
+       <p>
+
+    <a href="list.php?id=<?php echo $list['id']; ?>">
+
+        <?php echo htmlspecialchars($list['title']); ?>
+
+    </a>
+
+</p>
 
     <?php endforeach; ?>
 
