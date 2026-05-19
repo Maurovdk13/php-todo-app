@@ -104,17 +104,30 @@ $tasks = Task::getTasksByList($_GET['id']);
 
     <?php foreach($tasks as $task): ?>
 
-        <p>
+    <p>
 
-            <?php echo htmlspecialchars($task['title']); ?>
+        <?php if($task['status'] === 'done'): ?>
 
-            -
+            ✅
 
-            <?php echo htmlspecialchars($task['priority']); ?>
+        <?php else: ?>
 
-        </p>
+            ⬜
 
-    <?php endforeach; ?>
+        <?php endif; ?>
 
+        <?php echo htmlspecialchars($task['title']); ?>
+
+        -
+
+        <?php echo htmlspecialchars($task['priority']); ?>
+
+        <a href="toggle-task.php?id=<?php echo $task['id']; ?>">
+            Toggle
+        </a>
+
+    </p>
+
+<?php endforeach; ?>
 </body>
 </html>
