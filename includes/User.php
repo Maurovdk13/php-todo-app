@@ -90,3 +90,44 @@ class User {
         return $statement->execute();
     }
 }
+
+
+public function login() {
+
+    $conn = Db::getConnection();
+
+    $statement = $conn->prepare("
+        SELECT * FROM users
+        WHERE email = :email
+    ");
+
+    $statement->bindValue(":email", $this->email);
+
+    $statement->execute();
+
+    $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+    if($user) {
+
+        $hashedPassword = $user['password'];
+
+        if(password_verify($this->password, $hashedPassword)) {
+
+            session_start();
+
+            $_SESSION['user'] = $user;
+
+            return true;
+
+        } else {
+
+            throw new Exception("Incorrect password");
+
+        }
+
+    } else {
+
+        throw new Exception("Email not found");
+
+    }
+}
