@@ -89,7 +89,6 @@ class User {
 
         return $statement->execute();
     }
-}
 
 
 public function login() {
@@ -130,4 +129,6 @@ public function login() {
         throw new Exception("Email not found");
 
     }
+}
+
 }
