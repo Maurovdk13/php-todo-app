@@ -9,6 +9,10 @@ if(!isset($_SESSION['user'])) {
     header("Location: login.php");
 }
 
+if(!isset($_GET['id'])) {
+    die("No list selected");
+}
+
 $list = TodoList::getById($_GET['id']);
 
 $error = "";
@@ -30,6 +34,7 @@ if(!empty($_POST)) {
         $error = $e->getMessage();
 
     }
+
 }
 
 $tasks = Task::getTasksByList($_GET['id']);
@@ -50,7 +55,11 @@ $tasks = Task::getTasksByList($_GET['id']);
     </h1>
 
     <?php if($error): ?>
-        <p><?php echo $error; ?></p>
+
+        <p>
+            <?php echo $error; ?>
+        </p>
+
     <?php endif; ?>
 
     <h2>Add task</h2>
@@ -96,9 +105,13 @@ $tasks = Task::getTasksByList($_GET['id']);
     <?php foreach($tasks as $task): ?>
 
         <p>
+
             <?php echo htmlspecialchars($task['title']); ?>
+
             -
-            <?php echo $task['priority']; ?>
+
+            <?php echo htmlspecialchars($task['priority']); ?>
+
         </p>
 
     <?php endforeach; ?>
