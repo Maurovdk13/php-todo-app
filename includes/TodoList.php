@@ -60,4 +60,21 @@ class TodoList {
 
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function getById($id) {
+
+    $conn = Db::getConnection();
+
+    $statement = $conn->prepare("
+        SELECT * FROM lists
+        WHERE id = :id
+    ");
+
+    $statement->bindValue(":id", $id);
+
+    $statement->execute();
+
+    return $statement->fetch(PDO::FETCH_ASSOC);
+}
+
 }
