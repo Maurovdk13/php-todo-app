@@ -2,35 +2,40 @@
 
 session_start();
 
-require_once("../includes/TodoList.php");
+require_once("../includes/User.php");
+require_once("../includes/Transaction.php");
 
 if(!isset($_SESSION['user'])) {
     header("Location: login.php");
+    exit;
+}
+
+function h($value) {
+    return htmlspecialchars($value, ENT_QUOTES, "UTF-8");
 }
 
 $error = "";
+$success = "";
+$currentUserId = $_SESSION['user']['id'];
 
 if(!empty($_POST)) {
-
     try {
+        $transaction = new Transaction();
 
-        $list = new TodoList();
+        $transaction->setSenderId($currentUserId);
+        $transaction->setReceiverId($_POST['receiver_id']);
+        $transaction->setAmount($_POST['amount']);
+        $transaction->setReason($_POST['reason']);
+        $transaction->create();
 
-        $list->setTitle($_POST['title']);
-        $list->setUserId($_SESSION['user']['id']);
-
-        $list->create();
-
+        $success = "Transfer sent successfully.";
     } catch(Exception $e) {
-
         $error = $e->getMessage();
-
     }
 }
 
-$lists = TodoList::getAllByUser(
-    $_SESSION['user']['id']
-);
+$user = User::getById($currentUserId);
+$transactions = Transaction::getAllByUser($currentUserId);
 
 ?>
 
@@ -39,52 +44,88 @@ $lists = TodoList::getAllByUser(
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>XD Wallet</title>
+    <link rel="stylesheet" href="../assets/css/app.css">
 </head>
 <body>
 
-    <h1>
-        Welcome
-        <?php echo $_SESSION['user']['firstname']; ?>
-    </h1>
+    <main class="wallet-page">
+        <nav class="topbar">
+            <a class="brand" href="dashboard.php">XD Wallet</a>
+            <a class="logout-link" href="logout.php">Logout</a>
+        </nav>
 
-    <?php if($error): ?>
-        <p><?php echo $error; ?></p>
-    <?php endif; ?>
+        <section class="hero-panel">
+            <div>
+                <p class="eyebrow">Hello <?php echo h($user['firstname']); ?></p>
+                <h1>Your virtual XD currency dashboard</h1>
+            </div>
 
-    <h2>Create new list</h2>
+            <div class="balance-box">
+                <span>Balance</span>
+                <strong id="balanceAmount"><?php echo h(number_format($user['balance'], 2)); ?> XD</strong>
+            </div>
+        </section>
 
-    <form action="" method="post">
+        <?php if($error): ?>
+            <p class="message error"><?php echo h($error); ?></p>
+        <?php endif; ?>
 
-        <input
-            type="text"
-            name="title"
-            placeholder="Portugal Trip"
-        >
+        <?php if($success): ?>
+            <p class="message success"><?php echo h($success); ?></p>
+        <?php endif; ?>
 
-        <button type="submit">
-            Create
-        </button>
+        <section class="dashboard-grid">
+            <div class="panel">
+                <h2>Send XD</h2>
 
-    </form>
+                <form method="post" class="transfer-form" autocomplete="off">
+                    <label for="userSearch">Recipient</label>
+                    <input type="text" id="userSearch" placeholder="Search user..." required>
+                    <input type="hidden" id="receiverId" name="receiver_id">
+                    <div id="searchResults" class="search-results"></div>
 
-    <hr>
+                    <label for="amount">Amount</label>
+                    <input type="number" id="amount" name="amount" min="1" step="0.01" placeholder="5" required>
 
-    <h2>Your lists</h2>
+                    <label for="reason">Reason</label>
+                    <textarea id="reason" name="reason" maxlength="255" placeholder="Thanks for helping!" required></textarea>
 
-    <?php foreach($lists as $list): ?>
+                    <button type="submit">Send XD</button>
+                </form>
+            </div>
 
-       <p>
+            <div class="panel">
+                <h2>Recent transactions</h2>
 
-    <a href="list.php?id=<?php echo $list['id']; ?>">
+                <?php if(empty($transactions)): ?>
+                    <p class="empty-state">No transactions yet.</p>
+                <?php endif; ?>
 
-        <?php echo htmlspecialchars($list['title']); ?>
+                <div class="transaction-list">
+                    <?php foreach($transactions as $transaction): ?>
+                        <?php
+                            $isIncoming = $transaction['receiver_id'] == $currentUserId;
+                            $otherName = $isIncoming
+                                ? $transaction['sender_firstname'] . " " . $transaction['sender_lastname']
+                                : $transaction['receiver_firstname'] . " " . $transaction['receiver_lastname'];
+                            $sign = $isIncoming ? "+" : "-";
+                            $typeClass = $isIncoming ? "incoming" : "outgoing";
+                        ?>
 
-    </a>
+                        <a class="transaction-item <?php echo $typeClass; ?>" href="transaction.php?id=<?php echo h($transaction['id']); ?>">
+                            <div>
+                                <strong><?php echo h($otherName); ?></strong>
+                                <span><?php echo h(date("d/m/Y H:i", strtotime($transaction['created_at']))); ?></span>
+                            </div>
+                            <em><?php echo $sign . h(number_format($transaction['amount'], 2)); ?> XD</em>
+                        </a>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </section>
+    </main>
 
-</p>
-
-    <?php endforeach; ?>
-
+    <script src="../assets/js/dashboard.js"></script>
 </body>
 </html>
