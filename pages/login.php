@@ -16,6 +16,7 @@ if(!empty($_POST)) {
         $user->login();
 
         header("Location: dashboard.php");
+        exit;
 
     } catch(Exception $e) {
 
@@ -38,7 +39,7 @@ if(!empty($_POST)) {
     <h1>Login</h1>
 
     <?php if($error): ?>
-        <p><?php echo $error; ?></p>
+        <p><?php echo htmlspecialchars($error); ?></p>
     <?php endif; ?>
 
     <form action="" method="post">
@@ -56,6 +57,11 @@ if(!empty($_POST)) {
         </button>
 
     </form>
+
+    <p>
+        No account yet?
+        <a href="register.php">Register</a>
+    </p>
 
 </body>
 </html>

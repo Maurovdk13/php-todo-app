@@ -18,7 +18,7 @@ if(!empty($_POST)) {
 
         $user->register();
 
-        $success = "Account created successfully!";
+        $success = "Account created successfully! You received 10 XD tokens.";
 
     } catch(Exception $e) {
 
@@ -41,11 +41,11 @@ if(!empty($_POST)) {
     <h1>Register</h1>
 
     <?php if($error): ?>
-        <p><?php echo $error; ?></p>
+        <p><?php echo htmlspecialchars($error); ?></p>
     <?php endif; ?>
 
     <?php if($success): ?>
-        <p><?php echo $success; ?></p>
+        <p><?php echo htmlspecialchars($success); ?></p>
     <?php endif; ?>
 
     <form action="" method="post">
@@ -71,6 +71,11 @@ if(!empty($_POST)) {
         </button>
 
     </form>
+
+    <p>
+        Already have an account?
+        <a href="login.php">Login</a>
+    </p>
 
 </body>
 </html>

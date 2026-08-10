@@ -1,7 +1,11 @@
 <?php
 
-require_once("includes/Db.php");
+session_start();
 
-$conn = Db::getConnection();
+if(isset($_SESSION['user'])) {
+    header("Location: pages/dashboard.php");
+    exit;
+}
 
-echo "Database connected!";
+header("Location: pages/login.php");
+exit;
