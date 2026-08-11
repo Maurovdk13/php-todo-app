@@ -41,6 +41,11 @@ if(!empty($_POST)) {
 
     <main class="auth-page">
     <section class="panel auth-panel">
+    <div class="auth-brand">
+        <span class="brand-coin">XD</span>
+        <strong>XD Wallet</strong>
+    </div>
+
     <h1>Register</h1>
 
     <?php if($error): ?>

@@ -333,6 +333,15 @@ button {
     width: min(420px, 100%);
 }
 
+.auth-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    color: #ffffff;
+    font-size: 20px;
+}
+
 .auth-panel h1 {
     margin: 0 0 18px;
     color: #ffffff;
