@@ -41,7 +41,10 @@ $type = $isIncoming ? "Incoming" : "Outgoing";
 
     <main class="wallet-page narrow-page">
         <nav class="topbar">
-            <a class="brand" href="dashboard.php">XD Wallet</a>
+            <a class="brand" href="dashboard.php">
+                <span class="brand-coin">XD</span>
+                XD Wallet
+            </a>
             <a class="logout-link" href="logout.php">Logout</a>
         </nav>
 

@@ -5,8 +5,11 @@
 body {
     margin: 0;
     min-height: 100vh;
-    background: #f4f7fb;
-    color: #182230;
+    background:
+        radial-gradient(circle at top left, rgba(245, 178, 52, 0.20), transparent 32%),
+        radial-gradient(circle at top right, rgba(25, 118, 210, 0.16), transparent 28%),
+        #07111f;
+    color: #f5f7fb;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -17,7 +20,7 @@ a {
 .wallet-page {
     width: min(1120px, calc(100% - 32px));
     margin: 0 auto;
-    padding: 24px 0 48px;
+    padding: 28px 0 56px;
 }
 
 .narrow-page {
@@ -28,21 +31,38 @@ a {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
 }
 
 .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
     font-size: 22px;
     font-weight: 800;
     text-decoration: none;
 }
 
+.brand-coin {
+    display: inline-grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #ffd166;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #f7b733, #ffdd76);
+    color: #1b1302;
+    font-size: 13px;
+    box-shadow: 0 0 28px rgba(247, 183, 51, 0.35);
+}
+
 .logout-link,
 .button-link {
-    border: 1px solid #cfd8e3;
+    border: 1px solid rgba(255, 255, 255, 0.16);
     border-radius: 6px;
     padding: 10px 14px;
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+    color: #f5f7fb;
     text-decoration: none;
     font-weight: 700;
 }
@@ -52,23 +72,35 @@ a {
     align-items: stretch;
     justify-content: space-between;
     gap: 24px;
-    margin-bottom: 18px;
-    padding: 28px;
+    margin-bottom: 22px;
+    padding: 32px;
     border-radius: 8px;
-    background: #152238;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background:
+        linear-gradient(135deg, rgba(16, 32, 56, 0.96), rgba(11, 20, 36, 0.94)),
+        #101f38;
     color: #ffffff;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
 }
 
 .hero-panel h1 {
     max-width: 640px;
     margin: 6px 0 0;
-    font-size: 34px;
+    font-size: 40px;
     line-height: 1.15;
+}
+
+.hero-text {
+    max-width: 520px;
+    margin: 14px 0 0;
+    color: #b7c4d6;
+    font-size: 16px;
+    line-height: 1.6;
 }
 
 .eyebrow {
     margin: 0;
-    color: #6b7a90;
+    color: #f7b733;
     font-size: 13px;
     font-weight: 800;
     letter-spacing: 0;
@@ -76,15 +108,17 @@ a {
 }
 
 .hero-panel .eyebrow {
-    color: #9fc4ff;
+    color: #ffd166;
 }
 
 .balance-box {
     min-width: 220px;
-    padding: 18px;
+    padding: 22px;
     border-radius: 8px;
-    background: #ffffff;
-    color: #182230;
+    border: 1px solid rgba(255, 209, 102, 0.32);
+    background: linear-gradient(160deg, #1d2b45, #0f1828);
+    color: #f5f7fb;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .balance-box span,
@@ -93,15 +127,21 @@ a {
 }
 
 .balance-box span {
-    color: #526071;
+    color: #b7c4d6;
     font-size: 14px;
     font-weight: 700;
 }
 
 .balance-box strong {
     margin-top: 8px;
-    color: #0d8f61;
-    font-size: 30px;
+    color: #ffd166;
+    font-size: 34px;
+}
+
+.balance-box small {
+    display: block;
+    margin-top: 12px;
+    color: #8ea0b8;
 }
 
 .dashboard-grid {
@@ -112,16 +152,17 @@ a {
 }
 
 .panel {
-    border: 1px solid #dde5ef;
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 8px;
     padding: 22px;
-    background: #ffffff;
-    box-shadow: 0 12px 30px rgba(18, 34, 56, 0.08);
+    background: rgba(13, 24, 40, 0.92);
+    box-shadow: 0 18px 46px rgba(0, 0, 0, 0.28);
 }
 
 .panel h2,
 .detail-panel h1 {
     margin: 0 0 18px;
+    color: #ffffff;
 }
 
 .transfer-form {
@@ -130,7 +171,7 @@ a {
 }
 
 label {
-    color: #364152;
+    color: #cbd5e1;
     font-size: 14px;
     font-weight: 800;
 }
@@ -138,12 +179,23 @@ label {
 input,
 textarea {
     width: 100%;
-    border: 1px solid #cfd8e3;
+    border: 1px solid rgba(255, 255, 255, 0.14);
     border-radius: 6px;
     padding: 12px;
-    background: #ffffff;
-    color: #182230;
+    background: rgba(255, 255, 255, 0.06);
+    color: #f5f7fb;
     font: inherit;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #7f8da3;
+}
+
+input:focus,
+textarea:focus {
+    outline: 2px solid rgba(255, 209, 102, 0.35);
+    border-color: #ffd166;
 }
 
 textarea {
@@ -155,11 +207,15 @@ button {
     min-height: 44px;
     border: 0;
     border-radius: 6px;
-    background: #0d8f61;
-    color: #ffffff;
+    background: linear-gradient(135deg, #f7b733, #ffdd76);
+    color: #201504;
     cursor: pointer;
     font: inherit;
     font-weight: 800;
+}
+
+.transfer-form button {
+    box-shadow: 0 12px 28px rgba(247, 183, 51, 0.24);
 }
 
 .search-results {
@@ -169,11 +225,11 @@ button {
 
 .search-result {
     width: 100%;
-    border: 1px solid #dde5ef;
+    border: 1px solid rgba(255, 255, 255, 0.14);
     border-radius: 6px;
     padding: 10px;
-    background: #f8fafc;
-    color: #182230;
+    background: #152238;
+    color: #f5f7fb;
     text-align: left;
 }
 
@@ -187,11 +243,16 @@ button {
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    border: 1px solid #dde5ef;
+    border: 1px solid rgba(255, 255, 255, 0.10);
     border-radius: 8px;
     padding: 14px;
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.05);
     text-decoration: none;
+}
+
+.transaction-item:hover {
+    border-color: rgba(255, 209, 102, 0.38);
+    background: rgba(255, 255, 255, 0.08);
 }
 
 .transaction-item strong,
@@ -201,7 +262,7 @@ button {
 
 .transaction-item span {
     margin-top: 4px;
-    color: #667085;
+    color: #8ea0b8;
     font-size: 14px;
 }
 
@@ -212,11 +273,11 @@ button {
 }
 
 .transaction-item.incoming em {
-    color: #0d8f61;
+    color: #34d399;
 }
 
 .transaction-item.outgoing em {
-    color: #c2410c;
+    color: #fb923c;
 }
 
 .message,
@@ -226,20 +287,20 @@ button {
 }
 
 .message.success {
-    border: 1px solid #a7f3d0;
-    background: #ecfdf5;
-    color: #047857;
+    border: 1px solid rgba(52, 211, 153, 0.4);
+    background: rgba(6, 78, 59, 0.7);
+    color: #a7f3d0;
 }
 
 .message.error {
-    border: 1px solid #fecaca;
-    background: #fef2f2;
-    color: #b91c1c;
+    border: 1px solid rgba(248, 113, 113, 0.42);
+    background: rgba(127, 29, 29, 0.7);
+    color: #fecaca;
 }
 
 .empty-state {
-    background: #f8fafc;
-    color: #667085;
+    background: rgba(255, 255, 255, 0.05);
+    color: #8ea0b8;
 }
 
 .detail-list {
@@ -250,7 +311,7 @@ button {
 }
 
 .detail-list dt {
-    color: #667085;
+    color: #8ea0b8;
     font-weight: 800;
 }
 
@@ -263,6 +324,9 @@ button {
     place-items: center;
     min-height: 100vh;
     padding: 24px;
+    background:
+        radial-gradient(circle at top, rgba(247, 183, 51, 0.22), transparent 34%),
+        #07111f;
 }
 
 .auth-panel {
@@ -271,6 +335,7 @@ button {
 
 .auth-panel h1 {
     margin: 0 0 18px;
+    color: #ffffff;
 }
 
 .auth-panel form {

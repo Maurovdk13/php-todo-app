@@ -51,19 +51,24 @@ $transactions = Transaction::getAllByUser($currentUserId);
 
     <main class="wallet-page">
         <nav class="topbar">
-            <a class="brand" href="dashboard.php">XD Wallet</a>
+            <a class="brand" href="dashboard.php">
+                <span class="brand-coin">XD</span>
+                XD Wallet
+            </a>
             <a class="logout-link" href="logout.php">Logout</a>
         </nav>
 
         <section class="hero-panel">
             <div>
                 <p class="eyebrow">Hello <?php echo h($user['firstname']); ?></p>
-                <h1>Your virtual XD currency dashboard</h1>
+                <h1>Manage your XD coins like a crypto wallet</h1>
+                <p class="hero-text">Send, receive and track your virtual currency in real time.</p>
             </div>
 
             <div class="balance-box">
                 <span>Balance</span>
                 <strong id="balanceAmount"><?php echo h(number_format($user['balance'], 2)); ?> XD</strong>
+                <small>Live update every 10 seconds</small>
             </div>
         </section>
 
