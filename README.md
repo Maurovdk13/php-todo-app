@@ -32,5 +32,3 @@ De app gebruikt minimaal deze tabellen:
 
 - `users`
 - `transactions`
-
-De oude todo-tabellen staan niet meer in `database.sql`.
