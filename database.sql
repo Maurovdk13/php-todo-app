@@ -1,12 +1,10 @@
-CREATE DATABASE IF NOT EXISTS todo_app
+CREATE DATABASE IF NOT EXISTS currency_app
 CHARACTER SET utf8mb4
 COLLATE utf8mb4_general_ci;
 
-USE todo_app;
+USE currency_app;
 
 DROP TABLE IF EXISTS transactions;
-DROP TABLE IF EXISTS tasks;
-DROP TABLE IF EXISTS lists;
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (

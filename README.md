@@ -1,4 +1,4 @@
-# Virtual XD Currency App
+# Currency App
 
 Een pure PHP schoolproject waarmee gebruikers virtuele XD tokens kunnen sturen en ontvangen.
 
@@ -23,7 +23,7 @@ Een pure PHP schoolproject waarmee gebruikers virtuele XD tokens kunnen sturen e
 3. Open de app via:
 
 ```text
-http://localhost/todo-app/
+http://localhost/currency-app/
 ```
 
 ## Database

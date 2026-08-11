@@ -9,7 +9,7 @@ class Db {
         if(!self::$conn) {
 
             self::$conn = new PDO(
-                "mysql:host=localhost;dbname=todo_app;charset=utf8mb4",
+                "mysql:host=localhost;dbname=currency_app;charset=utf8mb4",
                 "root",
                 "",
                 [
