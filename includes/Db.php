@@ -17,7 +17,7 @@ class Db {
                 $host = "sql102.infinityfree.com";
                 $dbname = "if0_42670598_currency_app";
                 $username = "if0_42670598";
-                $password = "VUL_HIER_JE_INFINITYFREE_WACHTWOORD_IN";
+                $password = "D5ZvNxyMdkrCn24";
             }
 
             self::$conn = new PDO(
