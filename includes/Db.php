@@ -13,11 +13,15 @@ class Db {
             $username = "root";
             $password = "";
 
-            if(isset($_SERVER['HTTP_HOST']) && str_contains($_SERVER['HTTP_HOST'], "xdwallet.infinityfreeapp.com")) {
-                $host = "sql102.infinityfree.com";
-                $dbname = "if0_42670598_currency_app";
-                $username = "if0_42670598";
-                $password = "D5ZvNxyMdkrCn24";
+            $isOnline = isset($_SERVER['HTTP_HOST'])
+                && !str_contains($_SERVER['HTTP_HOST'], "localhost")
+                && !str_contains($_SERVER['HTTP_HOST'], "127.0.0.1");
+
+            if($isOnline) {
+                $host = "sql200.infinityfree.com";
+                $dbname = "if0_42671018_currency_app";
+                $username = "if0_42671018";
+                $password = "VUL_HIER_JE_INFINITYFREE_WACHTWOORD_IN";
             }
 
             self::$conn = new PDO(
